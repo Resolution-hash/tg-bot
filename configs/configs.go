@@ -8,8 +8,7 @@ import (
 )
 
 type Config struct {
-	TelegramAPIToken string
-	DatabaseURL      string
+	TelegramAPIToken, DbHost, DbPort, DbUser, DbPass, DbName string
 }
 
 func LoadConfig() *Config {
@@ -18,11 +17,12 @@ func LoadConfig() *Config {
 		log.Fatal("failed load file .env")
 	}
 
-	token := os.Getenv("TELEGRAM_API_TOKEN")
-	databaseUrl := os.Getenv("DATABASE_URL")
-
 	return &Config{
-		TelegramAPIToken: token,
-		DatabaseURL:      databaseUrl,
+		TelegramAPIToken: os.Getenv("TELEGRAM_API_TOKEN"),
+		DbHost: os.Getenv("DB_HOST"),
+		DbPort: os.Getenv("DB_PORT"),
+		DbUser: os.Getenv("DB_USER"),
+		DbPass: os.Getenv("DB_PASS"),
+		DbName: os.Getenv("DB_NAME"),
 	}
 }
